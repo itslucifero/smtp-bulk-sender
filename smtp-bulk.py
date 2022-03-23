@@ -33,7 +33,8 @@ print(f"""
 ██║  ██║██║  ██║██║  ██║╚██████╗██║  ██╗███████╗██████╔╝███████╗
 ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝
               Date :  {today}
-              Contact : https://t.me/kickflap                                                 """)
+              Contact : https://t.me/kickflap 
+              WEBSITE : https://hrackedz.com""")
 
 
 context = ssl.create_default_context()
@@ -56,7 +57,8 @@ print(f"""
 ██║  ██║██║  ██║██║  ██║╚██████╗██║  ██╗███████╗██████╔╝███████╗
 ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝
               Date :  {today}
-              Contact : https://t.me/kickflap                                                 """)
+              Contact : https://t.me/kickflap
+              WEBSITE : https://hrackedz.com""")
 print(f'\n NOW THE LETTER PARTS : ')
 letter_subject = input(' Subject of letter : ')
 letter_path = input('Please Enter PATH TO letter HTML.txt : ')
@@ -87,7 +89,8 @@ print(f"""
 ██║  ██║██║  ██║██║  ██║╚██████╗██║  ██╗███████╗██████╔╝███████╗
 ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝
               Date :  {today}
-              Contact : https://t.me/kickflap                                                \n """)
+              Contact : https://t.me/kickflap
+              WEBSITE : https://hrackedz.com\n """)
 
 
 print('''##########################SENDING DONT PANIC###############################''')
