@@ -1,9 +1,12 @@
+from email import message
 import smtplib, ssl
 from time import strftime
 import time
 from random import *
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+from email.message import EmailMessage
+from email.headerregistry import Address
 from email.header import Header
 import smtplib
 from colorama import *
@@ -33,8 +36,7 @@ print(f"""
 ██║  ██║██║  ██║██║  ██║╚██████╗██║  ██╗███████╗██████╔╝███████╗
 ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝
               Date :  {today}
-              Contact : https://t.me/kickflap 
-              WEBSITE : https://hrackedz.com""")
+              Contact : https://t.me/kickflap                                                 """)
 
 
 context = ssl.create_default_context()
@@ -57,8 +59,7 @@ print(f"""
 ██║  ██║██║  ██║██║  ██║╚██████╗██║  ██╗███████╗██████╔╝███████╗
 ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝
               Date :  {today}
-              Contact : https://t.me/kickflap
-              WEBSITE : https://hrackedz.com""")
+              Contact : https://t.me/kickflap                                                 """)
 print(f'\n NOW THE LETTER PARTS : ')
 letter_subject = input(' Subject of letter : ')
 letter_path = input('Please Enter PATH TO letter HTML.txt : ')
@@ -89,77 +90,61 @@ print(f"""
 ██║  ██║██║  ██║██║  ██║╚██████╗██║  ██╗███████╗██████╔╝███████╗
 ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝
               Date :  {today}
-              Contact : https://t.me/kickflap
-              WEBSITE : https://hrackedz.com\n """)
+              Contact : https://t.me/kickflap                                                \n """)
 
 
 print('''##########################SENDING DONT PANIC###############################''')
 
 
 #2eme function de send
+def generate_messages(recipients):
+    with open(letter_path, 'r') as myfile:
+        data = myfile.read()
+
+    for recipient in recipients:
+        message = EmailMessage()
+        message['Subject'] = letter_subject
+        message['From'] = Address(letter_From, *smtp_user.split("@"))
+        message['To'] = recipient
+        message.set_content(data, 'html')                
+        yield message
 
 
-context = ssl.create_default_context()
 
-def smtp(smtp_server, port, user, password):
+def smtp(smtp_server, port, user, password, messages):
     
     if port == '587':
         
-        with smtplib.SMTP(smtp_server, port) as server:
-            try:
+            with smtplib.SMTP(smtp_server, port) as server:
                  
-                 html = open(letter_path, 'r')
-                 data = html.read()
-                 message = MIMEMultipart('alternative')
-                 message['Subject'] = letter_subject
-                 message['From'] = str(Header(f'{letter_From} <{smtp_user}>'))
-                 
-                 part1 = MIMEText(data, 'html')
-                 message.attach(part1)
-
-
-                 server.ehlo()  
-                 server.starttls()
-                 server.ehlo()  
+                try:
                  server.login(user, password)
-                 
                  print(f'''\n\n\nSMTP ALIVE :\n SERVER : {smtp_server}\n User: {user}\n Pass: {password}\n PORT : {port} \n MESSAGE SENT! ''')
+                 for message in messages:
+                    now = datetime.now()
+                    current_time = now.strftime("%H:%M:%S")
+                    server.send_message(message)
+                    
+                    print('\n',message['To'] + f''' SENT!  {time.strftime('%X')}''')
                  print('''\n ###################################################################### SENT''')
-                 for email in mails:
-                    print('\n',email + f''' SENT!  {time.strftime('%X')}''')
-                    message['To'] = email
-                    server.sendmail(user, mails, message.as_string())
-            except smtplib.SMTPAuthenticationError or smtplib.SMTPConnectError or smtplib.SMTPDataError :
+                except smtplib.SMTPAuthenticationError or smtplib.SMTPConnectError or smtplib.SMTPDataError :
                  print('Dead SMTP CHANGE IT')    
     elif port == '465':
-        with smtplib.SMTP_SSL(smtp_server, port) as server:
-           
-            try:
-                
-                 html = open(letter_path, 'r')
-                 data = html.read()
-                 message = MIMEMultipart('alternative')
-                 message['Subject'] = letter_subject
-                 message['From'] = str(Header(f'{letter_From} <{smtp_user}>'))
+            with smtplib.SMTP_SSL(smtp_server, port) as server:
                  
-                 
-                 
-                 
-                 part1 = MIMEText(data, 'html')
-                 message.attach(part1)
-                 
-                 now = datetime.now()
-                 current_time = now.strftime("%H:%M:%S")
-   
+                try:
                  server.login(user, password)
+                 print(f'''\n\n\nSMTP ALIVE :\n SERVER : {smtp_server}\n User: {user}\n Pass: {password}\n PORT : {port} \n MESSAGE SENT! ''')
+                 for message in messages:
+                    now = datetime.now()
+                    current_time = now.strftime("%H:%M:%S")
+                    server.send_message(message)
                 
-                 print(f'''\n\n\n----------SMTP ALIVE : {current_time} \n----------SERVER : {smtp_server}\n----------User: {user}\n----------Pass: {password}\n----------PORT : {port} \n----------MESSAGE SENT! ''')
-                 print('''\n###################################################################### SENT''')
-                 for email in mails:
-                    print('\n',email + f''' SENT! {time.strftime('%X')}''')
-                    message['To'] = email
-                    server.sendmail(user, mails, message.as_string())
-            except smtplib.SMTPAuthenticationError or smtplib.SMTPConnectError or smtplib.SMTPDataError :
+                    print('\n',message['To'] + f''' SENT!  {time.strftime('%X')}''')
+                 print('''\n ###################################################################### SENT''')
+                
+                
+                except smtplib.SMTPAuthenticationError or smtplib.SMTPConnectError or smtplib.SMTPDataError :
                  print('Dead SMTP CHANGE IT')    
 
     else:
@@ -168,4 +153,4 @@ def smtp(smtp_server, port, user, password):
     
 
 
-smtp(smtp_server=smtp_server, port=smtp_port, user=smtp_user,  password=smtp_pass)
+smtp(smtp_server=smtp_server, port=smtp_port, user=smtp_user,  password=smtp_pass, messages=generate_messages(mails))
