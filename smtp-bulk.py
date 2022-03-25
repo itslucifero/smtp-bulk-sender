@@ -9,6 +9,8 @@ from email.message import EmailMessage
 from email.headerregistry import Address
 from email.header import Header
 import smtplib
+import colorama
+from colorama import Fore
 from colorama import *
 from datetime import datetime
 from datetime import date
@@ -25,7 +27,7 @@ else:
 #Took me 2 hours to get this shit done so unless u are adding some stuff dont fucking touch a shit
 
 today = date.today()
-print(f"""
+print(Fore.RED + f"""
         
                              SMTP Bulk Sender v 1.0.0        Coded By :       
                                                                                       
@@ -42,13 +44,13 @@ print(f"""
 context = ssl.create_default_context()
 
 #variables tawa3na :
-print(f'\n SETUP SMTP SERVER FIRST : ')
+print(f'\n[+]SETUP SMTP SERVER FIRST : ')
 smtp_server = input('Enter your smtp server HOST: ')
 smtp_port = input('Enter your SMTP port :')
 smtp_user = input('Please enter your SMTP USERNAME : ')
 smtp_pass = input('Enter your SMTP password : ')
 clear()
-print(f"""
+print(Fore.RED +f"""
         
                              SMTP Bulk Sender v 1.0.0        Coded By :       
                                                                                       
@@ -79,7 +81,7 @@ mails = get_contacts(input('Enter Path To Mail List (PLEASE FILTER YOUR MAIL LIS
 
 clear()
 
-print(f"""
+print(Fore.GREEN + f"""
         
                              SMTP Bulk Sender v 1.0.0        Coded By :       
                                                                                       
@@ -93,7 +95,7 @@ print(f"""
               Contact : https://t.me/kickflap                                                \n """)
 
 
-print('''##########################SENDING DONT PANIC###############################''')
+print(Fore.GREEN +'''##########################SENDING DONT PANIC###############################''')
 
 
 #2eme function de send
@@ -118,37 +120,46 @@ def smtp(smtp_server, port, user, password, messages):
             with smtplib.SMTP(smtp_server, port) as server:
                  
                 try:
-                 server.login(user, password)
-                 print(f'''\n\n\nSMTP ALIVE :\n SERVER : {smtp_server}\n User: {user}\n Pass: {password}\n PORT : {port} \n MESSAGE SENT! ''')
-                 for message in messages:
-                    now = datetime.now()
-                    current_time = now.strftime("%H:%M:%S")
-                    server.send_message(message)
+                 
+                     server.login(user, password)
+                     print(Fore.GREEN +
+                     f'''\n\n\nSMTP CONNECTION ESTABLISHED :\n SERVER : {smtp_server}\n User: {user}\n Pass: {password}\n PORT : {port} \n NO CONNECTION ERRORS! \n Wish with me no other erors haha ''')
+                     for message in messages:
+                         now = datetime.now()
+                         time.sleep(5)
+                         server.send_message(message)
+                
+                
+                         print(Fore.GREEN +'\n[+]', message['To'] + f''' SENT!  {time.strftime('%X')}''')
+                     print(Fore.GREEN +'''\n ###################################################################### SENT''')
+                
+                     
+                 
                     
-                    print('\n',message['To'] + f''' SENT!  {time.strftime('%X')}''')
-                 print('''\n ###################################################################### SENT''')
-                except smtplib.SMTPAuthenticationError or smtplib.SMTPConnectError or smtplib.SMTPDataError :
-                 print('Dead SMTP CHANGE IT')    
+                except smtplib.SMTPException:
+                    print(Fore.RED +'SMTP DIED OR DEAD [-] Error: unable to send email')
     elif port == '465':
             with smtplib.SMTP_SSL(smtp_server, port) as server:
                  
                 try:
-                 server.login(user, password)
-                 print(f'''\n\n\nSMTP ALIVE :\n SERVER : {smtp_server}\n User: {user}\n Pass: {password}\n PORT : {port} \n MESSAGE SENT! ''')
-                 for message in messages:
-                    now = datetime.now()
-                    current_time = now.strftime("%H:%M:%S")
-                    server.send_message(message)
+                 
+                    server.login(user, password)
+                    print(f'''\n\n\nSMTP CONNECTION ESTABLISHED :\n SERVER : {smtp_server}\n User: {user}\n Pass: {password}\n PORT : {port} \n NO CONNECTION ERRORS! \n Wish with me no other erors haha  ''')
+                    for message in messages:
+                         now = datetime.now()
+                         current_time = now.strftime("%H:%M:%S")
+                         time.sleep(5)
+                         server.send_message(message)
                 
-                    print('\n',message['To'] + f''' SENT!  {time.strftime('%X')}''')
-                 print('''\n ###################################################################### SENT''')
+                         print(Fore.GREEN +'\n[+]', message['To'] + f''' SENT!  {time.strftime('%X')}''')
+                    print(Fore.GREEN +'''\n ###################################################################### SENT''')
                 
                 
-                except smtplib.SMTPAuthenticationError or smtplib.SMTPConnectError or smtplib.SMTPDataError :
-                 print('Dead SMTP CHANGE IT')    
-
+                except smtplib.SMTPException:
+                    print(Fore.RED +'SMTP DIED OR DEAD [-] Error: unable to send email')
+                 
     else:
-        print('PORT NOT SUPPORTED')
+        print(Fore.RED + 'PORT NOT SUPPORTED')
         quit()
     
 
