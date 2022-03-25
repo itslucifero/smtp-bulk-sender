@@ -40,17 +40,17 @@ print(Fore.RED + f"""
               Date :  {today}
               Contact : https://t.me/kickflap                                                 """)
 
-
-context = ssl.create_default_context()
+try:
+    context = ssl.create_default_context()
 
 #variables tawa3na :
-print(f'\n[+]SETUP SMTP SERVER FIRST : ')
-smtp_server = input('Enter your smtp server HOST: ')
-smtp_port = input('Enter your SMTP port :')
-smtp_user = input('Please enter your SMTP USERNAME : ')
-smtp_pass = input('Enter your SMTP password : ')
-clear()
-print(Fore.RED +f"""
+    print(f'\n[+]SETUP SMTP SERVER FIRST : ')
+    smtp_server = input('Enter your smtp server HOST: ')
+    smtp_port = input('Enter your SMTP port :')
+    smtp_user = input('Please enter your SMTP USERNAME : ')
+    smtp_pass = input('Enter your SMTP password : ')
+    clear()
+    print(Fore.RED +f"""
         
                              SMTP Bulk Sender v 1.0.0        Coded By :       
                                                                                       
@@ -62,11 +62,13 @@ print(Fore.RED +f"""
 ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝
               Date :  {today}
               Contact : https://t.me/kickflap                                                 """)
-print(f'\n NOW THE LETTER PARTS : ')
-letter_subject = input(' Subject of letter : ')
-letter_path = input('Please Enter PATH TO letter HTML.txt : ')
-letter_From = input('Enter Letter FROM Name  ( EX: Support )  : ')
-
+    print(f'\n NOW THE LETTER PARTS : ')
+    letter_subject = input(' Subject of letter : ')
+    letter_path = input('Please Enter PATH TO letter HTML.txt : ')
+    letter_From = input('Enter Letter FROM Name  ( EX: Support )  : ')
+except KeyboardInterrupt:
+    print("\nCTRL+C Detect, leaving :D")
+    exit() 
 #Fuction lewla njibou les emails men txt
 
 def get_contacts(filename):
@@ -114,7 +116,8 @@ def generate_messages(recipients):
 
 
 def smtp(smtp_server, port, user, password, messages):
-    
+  try:
+
     if port == '587':
         
             with smtplib.SMTP(smtp_server, port) as server:
@@ -157,11 +160,16 @@ def smtp(smtp_server, port, user, password, messages):
                 
                 except smtplib.SMTPException:
                     print(Fore.RED +'SMTP DIED OR DEAD [-] Error: unable to send email')
-                 
-    else:
-        print(Fore.RED + 'PORT NOT SUPPORTED')
-        quit()
+     
     
+    else:
+        print('wrong PORT')
+  except KeyboardInterrupt:
+            print("CTRL+C Detect, leaving :D")
+            exit()      
 
-
-smtp(smtp_server=smtp_server, port=smtp_port, user=smtp_user,  password=smtp_pass, messages=generate_messages(mails))
+try:
+    smtp(smtp_server=smtp_server, port=smtp_port, user=smtp_user,  password=smtp_pass, messages=generate_messages(mails))
+except KeyboardInterrupt:
+    print('\nCTRL + C DETECTED LEAVING')
+    exit()    
