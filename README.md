@@ -18,6 +18,10 @@ python smtp-bulk.py
 
 
 
-SCREEN : 
+OLD SCREEN : 
 
 ![screen](https://github.com/hrackedz/smtp-bulk-sender/blob/main/bulk.PNG?raw=true)
+
+New SCREEN : 
+
+![screen](https://github.com/hrackedz/smtp-bulk-sender/blob/main/New%20Interface.PNG?raw=true)
