@@ -17,11 +17,3 @@ USE :
 python smtp-bulk.py
 
 
-
-OLD SCREEN : 
-
-![screen](https://github.com/mrhouse998/smtp-bulk-sender/blob/main/bulk.PNG?raw=true)
-
-New SCREEN : 
-
-![screen](https://github.com/mrhouse998/smtp-bulk-sender/blob/main/New%20Interface.PNG?raw=true)
