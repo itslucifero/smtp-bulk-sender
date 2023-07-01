@@ -4,11 +4,11 @@ Send emails through smtp script , but this time in bulk , lets say you have 100 
 
 Script is easy to use handy also follow the instruction i have mentioned in my script ! 
 
-Visit my [website](https://hrackedz.com) for more tools
 
 
 
-telegram me at : [HrackeDz](https://t.me/kickflap)
+
+telegram me at : [mrhouse998](https://t.me/mrhouse998)
 
 Otherwise Enjot the tool and !!!!! My script is only for educational purposes !!!!!
 
@@ -20,8 +20,8 @@ python smtp-bulk.py
 
 OLD SCREEN : 
 
-![screen](https://github.com/hrackedz/smtp-bulk-sender/blob/main/bulk.PNG?raw=true)
+![screen](https://github.com/mrhouse998/smtp-bulk-sender/blob/main/bulk.PNG?raw=true)
 
 New SCREEN : 
 
-![screen](https://github.com/hrackedz/smtp-bulk-sender/blob/main/New%20Interface.PNG?raw=true)
+![screen](https://github.com/mrhouse998/smtp-bulk-sender/blob/main/New%20Interface.PNG?raw=true)
