@@ -8,7 +8,7 @@ Script is easy to use handy also follow the instruction i have mentioned in my s
 
 
 
-telegram me at : [mrhouse998](https://t.me/mrhouse998)
+telegram me at : [itslucifero](https://t.me/itslucifero)
 
 Otherwise Enjot the tool and !!!!! My script is only for educational purposes !!!!!
 
