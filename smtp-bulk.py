@@ -33,7 +33,7 @@ print(Fore.RED + f"""
                                                                                       
 mrhouse998
               Date :  {today}
-              Contact : https://t.me/mrhouse998                                                 """)
+              Contact : https://t.me/itslucifero                                                 """)
 
 try:
     context = ssl.create_default_context()
